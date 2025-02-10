@@ -4,6 +4,7 @@ This repository contains all raw lithic data collected from the Steenbokfontein 
 This project is designed to coninue from 05/31/2024 - 05/31/2026. Data on each assemblaged will be continually added to this page, including raw lithic attribute data (as comma-separated-values), R scripts, Quarto documents, and summary tables.
 
 UPDATE (02-10-2025)
+
 AG_Summer2024_06_26_Final.csv contains the data I collected from Steenbokfontein up to summer 2024
 
 SBF_Results_Section.qmd is an R quarto document that accepts AG_Summer2024_06_26_Final.csv
