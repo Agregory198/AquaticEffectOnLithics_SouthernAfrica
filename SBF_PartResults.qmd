@@ -1,16 +1,20 @@
 ---
-title: "SBF Partial Re-results"
+title: "Steenbokfontein Preliminary Results"
 bibliography: references.bib
 link-citations: true
 execute: 
   echo: false
   warning: false
   message: false
-format: pdf
+format: html
 editor: visual
 ---
 
 ```{r library}
+#| warning: false
+#| message: false
+
+
 # To plot figures
 library(ggplot2)
 library(forcats)
@@ -27,10 +31,12 @@ library(stringr)
 
 # To generate tables
 library(gtsummary)
+library(gt)
 library(broom)
 library(broom.mixed)
 
 library(stargazer)
+library(kableExtra)
 
 # To tidy the data
 library(tidyr)
@@ -132,27 +138,27 @@ Here, we examine whether hunter-gatherer technological strategies changed as the
 
 ## Raw material and toolkit composition
 
-Toolkit composition referes to the raw material distribution, surplus, and relationship between cores, flakes, and retouched tools. Raw material distribution and surplus are both directly linked to where hunter-gatherers procure, transport, and reduce their lithic tools [@andrefsky1994, @andrefsky2009, @binford: @dibble2005, @kuhn1992, @kuhn1994, @nelson1991] . Shifts in local and non-local raw materials can inform us about changes in hunter-gatherer mobility patterns [@andrefsky1994, @kelly1983] . For instance, a reduction in non-local raw material may imply reduced hunter-gatherer movement across the landscape [@kelly1992]. To evaluate this pattern, we examine changes in the proportion of raw material over time at SBF. Shifts in raw material distribution and reduced mobility will likely reflect the amount of surplus hunter-gatherers store at SBF [@surovell2009].
+Toolkit composition refers to the raw material distribution, surplus, and relationship between cores, flakes, and retouched tools. Raw material distribution and surplus are both directly linked to where hunter-gatherers procure, transport, and reduce their lithic tools [@andrefsky1994; @andrefsky2009; @binford; @dibble2005; @kuhn1992; @kuhn1994; @nelson1991] . Shifts in local and non-local raw materials can inform us about changes in hunter-gatherer mobility patterns [@andrefsky1994; @kelly1983] . For instance, a reduction in non-local raw material may imply reduced hunter-gatherer movement across the landscape [@kelly1992]. To evaluate this pattern, we examine changes in the proportion of raw material over time at SBF. Shifts in raw material distribution and reduced mobility will likely reflect the amount of surplus hunter-gatherers store at SBF [@surovell2009].
 
 We use the relative size of lithics to evaluate whether raw material surplus changes between layers associated with coastal and terrestrial resource use [see @mackay2009] . Firstly, we extract the 50th and 75th percentile of lithic mass for layers associated with coastal resource use and terrestrial resource use. Then, for each raw material, we contrast these percentiles against 1) all lithic mass, 2) only core mass, and 3) maximum core length. If the average mass or length intersect the 75th percentile, then there is more raw material surplus than we would expect in that layer. If the average mass or length is at the 50th percentile, then this reflects the average expectation for the layer. If the average mass or length fall below the 50th percentile, then this reflects less raw material surplus than we would expect. As hunter-gatherers focus on coastal resources, we expect raw material surplus to increase.
 
-We can also use lithic density, number of flakes, cores, and retouched tools to eplore the composition of toolkits. Changes in the frequency of flakes, cores, and retouched tools can inform us about mobility strategies and allude to site function [@kelly1988, @kelly1992, @nelson1991] . For instance, an emphasis in retouched tools over flake production can suggest hunter-gatherer groups with higher mobility and a site that may be associated with logistical foraging patterns. Greater frequency of cores and flake production can reflect lower mobility and sites associated with residential patterns [@barton, @binford, @kelly1992]. To evaluate whether the composition of hunter-gatherer toolkits change as they focus on coastal resources, we look at 1) percent of retouched tools to lithic density, 2) retouched flakes-to-unmodified flakes, and 3) retouched flakes-to-cores.
+We can also use lithic density, number of flakes, cores, and retouched tools to explore the composition of toolkits. Changes in the frequency of flakes, cores, and retouched tools can inform us about mobility strategies and allude to site function [@kelly1988; @kelly1992; @nelson1991] . For instance, an emphasis in retouched tools over flake production can suggest hunter-gatherer groups with higher mobility and a site that may be associated with logistical foraging patterns. Greater frequency of cores and flake production can reflect lower mobility and sites associated with residential patterns [@barton; @binford; @kelly1992]. To evaluate whether the composition of hunter-gatherer toolkits change as they focus on coastal resources, we look at 1) percent of retouched tools to lithic density, 2) retouched flakes-to-unmodified flakes, and 3) retouched flakes-to-cores.
 
 ## Lithic tool utility and reduction intensity
 
-Surovell [@surovell2009] and Kuhn [@kuhn1994] explain lithic utility as the remaining portion of the lithic that can still be reduced. They define lithic utility for flakes ($f_u$) and retouched tools ($f_u$), as:
+Surovell [-@surovell2009] and Kuhn [-@kuhn1994] explain lithic utility as the remaining portion of the lithic that can still be reduced. They define lithic utility for flakes ($f_u$) and retouched tools ($f_u$), as:
 
 $$
 f_u=l*(l-m)
 $$
 
-where *l* is the length of the tool and *m* is the *slug*, or the smallest usable length for the tool. We use these equations to estimate the utility of lithics at SBF. However, since there are increasing occurrences of *microlithic* technologies in Africa and Europe that are measured less than one centimeter [e.g., @ambrose2002, @belfer-cohen2002, @hiscock2015, @mitchell1988, @pargeter2016] , subtracting by the *slug* is likely negligible.
+where *l* is the length of the tool and *m* is the *slug*, or the smallest usable length for the tool. We use these equations to estimate the utility of lithics at SBF. However, since there are increasing occurrences of *microlithic* technologies in Africa and Europe that are measured less than one centimeter [e.g. @ambrose2002; @belfer-cohen2002; @hiscock2015; @mitchell1988; @pargeter2016] , subtracting by the *slug* is likely negligible.
 
-We adopt Lombao et al.'s [@lombao2020, @lombao2023] definition for reduction intensity as the amount of total volume removed from a core or tool. Previous studies have used several distinct metrics to quantify the degree of reduction intensity including volumetric reconstruction [@lombao2020, @lombao2023], scar density index (SDI) [@clarkson2013] , and a comparison between core and flake size. Volumetric reconstruction and SDI both rely on core measurements and thus, the sample size is constrained on the number of cores and not flakes. Since we measure the utility for each flake, we choose the latter approach here. That is, we average each core's maximum flake scar and subtract this by each flake's technological length. From here, we can measure changes in lithic utility, reduction intensity, and the interaction between utility and reduction intensity through SBF.
+We adopt Lombao et al.'s [-@lombao2020; -@lombao2023] definition for reduction intensity as the amount of total volume removed from a core or tool. Previous studies have used several distinct metrics to quantify the degree of reduction intensity including volumetric reconstruction [@lombao2020; @lombao2023], scar density index (SDI) [@clarkson2013] , and a comparison between core and flake size. Volumetric reconstruction and SDI both rely on core measurements and thus, the sample size is constrained on the number of cores and not flakes. Since we measure the utility for each flake, we choose the latter approach here. That is, we average each core's maximum flake scar and subtract this by each flake's technological length. From here, we can measure changes in lithic utility, reduction intensity, and the interaction between utility and reduction intensity through SBF.
 
 ## Scraper utility and retouch intensity
 
-Scrapers are the most abundant retouched tool at SBF and so, we explore how the utility and retouch intensity changes between layers associated with coastal and terrestrial resources. We use the same utility measurement described above to calculate scraper utility. Since all scrapers are unifacial, we adopt Eren et al.'s [@eren2005, see also @kuhn1990] approach to quantify the retouch intensity of unifacial tools (*V*). To accomplish this, we apply their geometric equation to all scrapers at SBF:
+Scrapers are the most abundant retouched tool at SBF and so, we explore how the utility and retouch intensity changes between layers associated with coastal and terrestrial resources. We use the same utility measurement described above to calculate scraper utility. Since all scrapers are unifacial, we adopt Eren et al.'s [-@eren2005; see also @kuhn1990] approach to quantify the retouch intensity of unifacial tools (*V*). To accomplish this, we apply their geometric equation to all scrapers at SBF:
 
 $$
 V = \frac{L D^2}{2} \left( \sin^2(a) \cot(b) - \sin(a) \cos(a) \right)
@@ -164,23 +170,11 @@ where *L* is the length of the retouched edge, *D* is the retouched length, *a* 
 
 ## Raw material distribution
 
-@tab-one and @fig-RawMaterial show the distribution of artifact type by raw material. @fig-RawMaterial shows the raw material distribution by individual layer and lumped into layers associated with coastal (layers 1-3) and terrestrial diets (layers 4a and 4b). These data suggest that, as hunter-gatherer focus on coastal resources, there is a decrease in the proportion of retouched tools for all raw materials and increase in cores (@fig-RawMaterial (A)) . @fig-RawMaterial (B) shows a more nuanced raw material pattern. As silcrete cores decrease towards layer 2, there is an increase in quartzite cores. At the same time, silcrete and quartz retouched tools increase during layer 2. Additionally, @tab-one shows a general decrease in silcrete materials through SBF, implying hunter-gatherers reduced the amount of silcrete brought into SBF. Together, these patterns reflect shifts in hunter-gatherer toolkits and raw material transportation when diets become centered around coastal foods.
+Table 1 and @fig-RawMaterial show the distribution of artifact type by raw material. @fig-RawMaterial shows the raw material distribution by individual layer and lumped into layers associated with coastal (layers 1-3) and terrestrial diets (layers 4a and 4b). These data suggest that, as hunter-gatherer focus on coastal resources, there is a decrease in the proportion of retouched tools for all raw materials and increase in cores (@fig-RawMaterial (a)) . @fig-RawMaterial (b) shows a more nuanced raw material pattern. As silcrete cores decrease towards layer 2, there is an increase in quartzite cores. At the same time, silcrete and quartz retouched tools increase during layer 2. Additionally, table 1 shows a general decrease in silcrete materials through SBF, implying hunter-gatherers reduced the amount of silcrete brought into SBF. Together, these patterns reflect shifts in hunter-gatherer toolkits and raw material transportation when diets become centered around coastal foods.
 
-An analysis of cortical-to-noncortical flakes (@fig-Cortical) further implies significant shifts in raw material transport. @fig-Cortical (A) shows that silcrete has the lowest cortical-to-noncortical ratios for layers associated with terrestrial diets, suggesting greater cortical silcrete. As hunter-gatherers focused on coastal resources, silcrete reflects similar ratios for quartz and quartzite. @fig-Cortical (B) shows a general decrease in quartz ratios through SBF, implying a greater proportion of non-cortical quartz flakes through time. These shifts in cortical-to-noncortical ratios confirm that hunter-gatherer modified where they procured raw material and where, on the landscape, they removed cortical pieces before transporting them into SBF.
+An analysis of cortical-to-noncortical flakes (@fig-Cortical) further implies significant shifts in raw material transport. @fig-Cortical (a) shows that silcrete has the lowest cortical-to-noncortical ratios for layers associated with terrestrial diets, suggesting greater cortical silcrete. As hunter-gatherers focused on coastal resources, silcrete reflects similar ratios for quartz and quartzite. @fig-Cortical (b) shows a general decrease in quartz ratios through SBF, implying a greater proportion of non-cortical quartz flakes through time. These shifts in cortical-to-noncortical ratios confirm that hunter-gatherer modified where they procured raw material and where, on the landscape, they removed cortical pieces before transporting them into SBF.
 
-## Raw material surplus
-
-@fig-ArtMass explore the relationship between raw material surplus and raw material distribution. Firstly, the 50th and 75th percentile for all artifact mass (@fig-ArtMass) is not significantly different, implying identically distributed distributions for artifact mass when between layers associated with coastal and terrestrial resource consumption. A Bayesian ANOVA shows no significant shifts within raw materials between layers, but there are significant difference between raw materials. Specifically, quartzite and secrete are consistently above the 75th percentile in both the grouped (A) and individual layers (A). This suggests there was a greater surplus of quartzite and silcrete at SBF, but this is not correlated with terrestrial or coastal diets.
-
-@fig-CoreMass and @fig-CoreLength explore the relationship between raw material surplus, core mass, and core maximum length. Here, there is a significant difference between the mass and maximum length between layers associated with coastal and terrestrial resource use. In both figures, the terrestrial layers have, on average, smaller cores than layers associated with coastal resource use. A reduced sample size for cores increases the statistical uncertainty, but the posterior distribution for a Bayesian ANOVA still suggests no significant difference within raw material with significant shifts between raw material through SBF. Compared with the 50th and 75th percentile, quartzite and silcrete align with the 75th percentile for every layer. However, for terrestrial layers, quartz cores fall in line with the 50th percentile but fall well below this threshold when hunter-gatherers focus on coastal resources. Overall, quartzite and silcrete have, on average, larger cores while the quartz cores are significantly smaller. Moreover, quartz cores are well below average size when hunter-gatherers focus on coastal resources, which may imply reduced quartz resource surplus during these intervals.
-
-## Toolkit composition
-
-@fig-RetouchToDensity shows the relationship between the percent of formal tools and lithic density through SBF. The expectation is that more formal tools and lower lithic density reflects hunter-gatherers that move more frequently. Fewer formal tools and a higher lithic density reflects hunter-gatherers with lower mobiloity strategies. @fig-RetouchToDensity implies the layers associated with coastal resource exploitation (1, 2, and 3) are associated with higher mobility and the layers associated with terrestrial resources (4a and 4b) are associated with lower mobility.
-
-@fig-RetouchFlakeCore explores the relationship between retouche flakes, flakes, and cores. @fig-RetouchFlakeCore shows that the ratios for retouched flake-to-flake and retouched flake-to-core increase towards layers 1, 2, and 3. These data suggest that hunter-gatherers either 1) invested in more retouched tools or 2) carried more retouched tools into SBF during layers associated with coastal resources use (1, 2, and 3). In both cases, the expectation is that a greater emphasis in retouched tools reflects more mobile hunter-gatherers. These show distinct changes in toolkit through SBF as hunter-gatherer begin to focus on coastal resources.
-
-```{r tab-one, tab.cap="Count and percentage of the three main lithic categories conditioned by raw material: Cores, Flakes, and Retouched tools. Retouched tool categories contains miscelleneous retouched flakes, backed tools, and scrapers."}
+```{r tab.cap="Count and percentage of the three main lithic categories conditioned by raw material: Cores, Flakes, and Retouched tools. Retouched tool categories contains miscelleneous retouched flakes, backed tools, and scrapers."}
 #| label: tab-one
 
 
@@ -202,8 +196,12 @@ df |>
       ~ .x |>
         tbl_summary(by = "Artifact class", missing = "no") |> add_n()
   ) |>
-  modify_header(label = "")
+  modify_header(label = "") -> tab1
 ```
+
+::: landscape
+`r tab1`
+:::
 
 ```{r RMGGplot}
 
@@ -430,6 +428,12 @@ ggarrange(
   common.legend = TRUE
 )
 ```
+
+## Raw material surplus
+
+@fig-ArtMass explore the relationship between raw material surplus and raw material distribution. Firstly, the 50th and 75th percentile for all artifact mass (@fig-ArtMass) is not significantly different, implying identically distributed distributions for artifact mass when between layers associated with coastal and terrestrial resource consumption. A Bayesian ANOVA shows no significant shifts within raw materials between layers, but there are significant difference between raw materials. Specifically, quartzite and secrete are consistently above the 75th percentile in both the grouped (a) and individual layers (b). This suggests there was a greater surplus of quartzite and silcrete at SBF, but this is not correlated with terrestrial or coastal diets.
+
+@fig-CoreMass and @fig-CoreLength explore the relationship between raw material surplus, core mass, and core maximum length. Here, there is a significant difference between the mass and maximum length between layers associated with coastal and terrestrial resource use. In both figures, the terrestrial layers have, on average, smaller cores than layers associated with coastal resource use. A reduced sample size for cores increases the statistical uncertainty, but the posterior distribution for a Bayesian ANOVA still suggests no significant difference within raw material with significant shifts between raw material through SBF. Compared with the 50th and 75th percentile, quartzite and silcrete align with the 75th percentile for every layer. However, for terrestrial layers, quartz cores fall in line with the 50th percentile but fall well below this threshold when hunter-gatherers focus on coastal resources. Overall, quartzite and silcrete have, on average, larger cores while the quartz cores are significantly smaller. Moreover, quartz cores are well below average size when hunter-gatherers focus on coastal resources, which may imply reduced quartz resource surplus during these intervals.
 
 ```{r AllMassPriors}
 # design model to look at the relationship between artifact mass and the 50th and 75th percentiles
@@ -929,6 +933,12 @@ ggarrange(
 )
 ```
 
+## Toolkit composition
+
+@fig-RetouchToDensity shows the relationship between the percent of formal tools and lithic density through SBF. The expectation is that more formal tools and lower lithic density reflects hunter-gatherers that move more frequently. Fewer formal tools and a higher lithic density reflects hunter-gatherers with lower mobility strategies. @fig-RetouchToDensity implies the layers associated with coastal resource exploitation (1, 2, and 3) are associated with higher mobility and the layers associated with terrestrial resources (4a and 4b) are associated with lower mobility.
+
+@fig-RetouchFlakeCore explores the relationship between retouched flakes, flakes, and cores. @fig-RetouchFlakeCore shows that the ratios for retouched flake-to-flake and retouched flake-to-core increase towards layers 1, 2, and 3. These data suggest that hunter-gatherers either 1) invested in more retouched tools or 2) carried more retouched tools into SBF during layers associated with coastal resources use (1, 2, and 3). In both cases, the expectation is that a greater emphasis in retouched tools reflects more mobile hunter-gatherers. These data show distinct changes in toolkits through SBF as hunter-gatherer begin to focus on coastal resources.
+
 ```{r fig-RetouchToDensity, fig.cap="Percent of retouched tools to lithic density at SBF. Higher formal tools and lower lithic density implies higher mobility; lower formal tools and higher lithic density implies lower mobility. These data suggest layers 1, 2, and 3 are asscoaited with increased mobility and layers 4a and 4b are associated with lower mobility."}
 #| label: fig-RetouchToDensity
 
@@ -952,7 +962,7 @@ sbf_df |>
   
   ggplot(aes(x = Lithic_Dens, y = Tool_Perc, color = Layer, label = Layer))+
   geom_point(size = 2)+
-  geom_text(aes(fontface = 2),hjust = 0, vjust = -0.4)+
+  geom_text(aes(fontface = 2),hjust = 1.5, vjust = 0)+
   xlab("Lithic Density")+ylab("Formal Tool Percent")+
   theme_minimal()+
   guides(color = "none")+
@@ -1352,7 +1362,7 @@ Gamma_Prior_Mass_Ind <- prior(normal(log(3),0.5), class = "Intercept")+
 ```
 
 ```{r flakeUtRedBayesMods}
-fit_red_flake_grouped <- brm(
+fit_UtRed_flake_grouped <- brm(
   Ut_Red ~ STRAT_mod*RAWMATERIAL,
   data = fit_df,
   family = lognormal(link = "identity"),
@@ -1363,7 +1373,7 @@ fit_red_flake_grouped <- brm(
   seed = 5571711
 )
 
-fit_red_flake_ind <- brm(
+fit_UtRed_flake_ind <- brm(
   Ut_Red ~ STRAT*RAWMATERIAL,
   data = fit_df,
   family = lognormal(link = "identity"),
@@ -1865,7 +1875,9 @@ ggarrange(
 )
 ```
 
-# Supplemental Figures
+\newpage
+
+# Supplemental Tables
 
 ```{r backupPlot}
 #| include: false
@@ -1901,9 +1913,9 @@ pairs_plot |>
   labs(title = "", y = "Pairwise Comparisons", x = "Estimate")
 ```
 
-## Supp 1
+## Raw material surplus
 
-```{r tab-AllMassGroup}
+```{r tab-AllMassGroup, tab.cap="Bayesian ANOVA of the mass for all artifacts for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_mass_all_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 # Pairwise comparisons with Bayesian credible intervals
@@ -1928,7 +1940,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-AllMassInd}
+```{r tab-AllMassInd, tab.cap="Bayesian ANOVA of the mass for all artifacts for individual layers. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_mass_all_ind, ~ STRAT*RAWMATERIAL)
 
 # Pairwise comparisons with Bayesian credible intervals
@@ -1953,9 +1965,9 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 2
+## 
 
-```{r tab-CoreMassGroup}
+```{r tab-CoreMassGroup, tab.cap="Bayesian ANOVA of core mass for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_mass_core_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 # Pairwise comparisons with Bayesian credible intervals
@@ -1980,7 +1992,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-CoreMassInd}
+```{r tab-CoreMassInd, tab.cap="Bayesian ANOVA of core mass for individual layers. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_mass_core_ind, ~ STRAT*RAWMATERIAL)
 
 # Pairwise comparisons with Bayesian credible intervals
@@ -2005,9 +2017,9 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 3
+## 
 
-```{r tab-CoreLengthGroup}
+```{r tab-CoreLengthGroup, tab.cap="Bayesian ANOVA of maximum core length for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_length_core_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2029,7 +2041,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-CoreLengthInd}
+```{r tab-CoreLengthInd, tab.cap="Bayesian ANOVA of maximum core length for individual layers. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_length_core_ind, ~ STRAT*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2051,9 +2063,11 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 4
+## Flake utility and reduction intensity
 
-```{r tab-FlakeUtilityGroup}
+### Utility
+
+```{r tab-FlakeUtilityGroup, tab.cap="Bayesian ANOVA of flake utility for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_utility_flake_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2075,7 +2089,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-FlakeUtilityInd}
+```{r tab-FlakeUtilityInd, tab.cap="Bayesian ANOVA of flake utility for individual layers. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_utility_flake_ind, ~ STRAT*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2097,9 +2111,9 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 5
+### Reduction intensity
 
-```{r tab-FlakeRedGroup}
+```{r tab-FlakeRedGroup, tab.cap="Bayesian ANOVA of reduction intensity for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_red_flake_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2121,7 +2135,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-FlakeRedInd}
+```{r tab-FlakeRedInd, tab.cap="Bayesian ANOVA of reduction intensity for individual layers. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_red_flake_ind, ~ STRAT*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2143,32 +2157,10 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 6
+### Utility-to-reduction intensity
 
-```{r tab-FlakeRedGroup}
-emmeans_res <- emmeans(fit_red_flake_grouped, ~ STRAT_mod*RAWMATERIAL)
-
-pairs1 <- pairs(emmeans_res) |>
-  as_tibble() |>
-  rename(Contrast = contrast,
-         Estimate = estimate,
-         `Lower CI` = lower.HPD,
-         `Upper CI` = upper.HPD)
-
-color_me <- which(
-    (pairs1$`Lower CI` > 0 & pairs1$`Upper CI` > 0) |
-    (pairs1$`Lower CI` < 0 & pairs1$`Upper CI` < 0)
-  )
-
-pairs1 |>
-  kable(booktabs = T) |>
-  kable_styling() |>
-  row_spec(color_me, color = "black",
-           background = "red")
-```
-
-```{r tab-FlakeRedInd}
-emmeans_res <- emmeans(fit_red_flake_ind, ~ STRAT*RAWMATERIAL)
+```{r tab-FlakeUtRedGroup, tab.cap="Bayesian ANOVA of utility-to-reduction intensity for layers grouped by diet. The red rows show significantly different distributions within a 95% credible interval (CI)."}
+emmeans_res <- emmeans(fit_UtRed_flake_grouped, ~ STRAT_mod*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
   as_tibble() |>
@@ -2189,9 +2181,33 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 7
+```{r tab-FlakeUtRedInd, tab.cap="Bayesian ANOVA of utility-to-reduction intensity for individual. The red rows show significantly different distributions within a 95% credible interval (CI)."}
+emmeans_res <- emmeans(fit_UtRed_flake_ind, ~ STRAT*RAWMATERIAL)
 
-```{r tab-scraperRetGroup}
+pairs1 <- pairs(emmeans_res) |>
+  as_tibble() |>
+  rename(Contrast = contrast,
+         Estimate = estimate,
+         `Lower CI` = lower.HPD,
+         `Upper CI` = upper.HPD)
+
+color_me <- which(
+    (pairs1$`Lower CI` > 0 & pairs1$`Upper CI` > 0) |
+    (pairs1$`Lower CI` < 0 & pairs1$`Upper CI` < 0)
+  )
+
+pairs1 |>
+  kable(booktabs = T) |>
+  kable_styling() |>
+  row_spec(color_me, color = "black",
+           background = "red")
+```
+
+## Scraper utility and retouch intensity
+
+### Retouch intensity by raw material
+
+```{r tab-scraperRetGroup, tab.cap="Bayesian ANOVA of scraper retouch intensity for layers grouped by diet for all raw materials. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 # posterior distributions
 emmeans_res <- emmeans(fit_red_scrap2, ~ STRAT_mod)
 
@@ -2214,7 +2230,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-scraperRetInd}
+```{r tab-scraperRetInd, tab.cap="Bayesian ANOVA of scraper retouch intensity for individual layers for all aw materials. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_red_scrap_ind, ~ STRAT*RAWMATERIAL)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2236,7 +2252,9 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-scraperRetGroup2}
+### Retouch intensity all raw materials
+
+```{r tab-scraperRetGroup2, tab.cap="Bayesian ANOVA of scraper retouch intensity for layers grouped by diet not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 # Posterior distributions with all raw materials
 emmeans_res <- emmeans(fit_red_scrap2, ~ STRAT_mod)
 
@@ -2259,7 +2277,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-scraperRetInd2}
+```{r tab-scraperRetInd2, tab.cap="Bayesian ANOVA of scraper retouch intensity for inividual layers not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_red_scrap1, ~ STRAT)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2281,9 +2299,9 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 8
+### Utility
 
-```{r tab-scraperRetUtGroup}
+```{r tab-scraperRetUtGroup1, tab.cap="Bayesian ANOVA of scraper utility for layers grouped by diet and not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_ut_scrap_grouped, ~ STRAT_mod)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2305,7 +2323,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-scraperRetUtInd}
+```{r tab-scraperRetUtInd1, tab.cap="Bayesian ANOVA of scraper utility for individual layers grouped by diet and not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_ut_scrap_ind, ~ STRAT)
 
 pairs1 <- pairs(emmeans_res) |>
@@ -2327,9 +2345,9 @@ pairs1 |>
            background = "red")
 ```
 
-## Supp 9
+### Retouch intensity-to-utility
 
-```{r tab-scraperRetUtGroup}
+```{r tab-scraperRetUtGroup2, tab.cap="Bayesian ANOVA of scraper retouch intensit-to-utility for layers grouped by diet and not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_ReUt_scrap_grouped, ~ STRAT_mod)
 
 # Pairwise comparisons with Bayesian credible intervals
@@ -2352,7 +2370,7 @@ pairs1 |>
            background = "red")
 ```
 
-```{r tab-scraperRetUtInd}
+```{r tab-scraperRetUtInd2, tab.cap="Bayesian ANOVA of scraper retouch intensit-to-utility for individual layers and not conditioned by raw material. The red rows show significantly different distributions within a 95% credible interval (CI)."}
 emmeans_res <- emmeans(fit_ReUt_scrap_ind, ~ STRAT)
 
 # Pairwise comparisons with Bayesian credible intervals
